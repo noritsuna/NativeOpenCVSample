@@ -1,0 +1,299 @@
+apply plugin: 'com.android.model.application'
+
+model {
+    android {
+        compileSdkVersion = 23
+        buildToolsVersion = "23.0.1"
+
+        defaultConfig.with {
+            applicationId = "org.siprop.android.nativeopencvsample"
+            minSdkVersion.apiLevel  = 19
+            targetSdkVersion.apiLevel = 23
+            versionCode = 1
+            versionName = "1.0"
+        }
+    }
+    compileOptions.with {
+        sourceCompatibility = JavaVersion.VERSION_1_7
+        targetCompatibility = JavaVersion.VERSION_1_7
+    }
+    android.ndk {
+        moduleName = "NativeOpenCV"
+        cppFlags += "-std=c++11"
+        cppFlags += "-fexceptions"
+        cppFlags += "-I${file("src/main/jni//include")}".toString()
+        ldLibs += ["android", "EGL", "GLESv2", "dl", "log", "z"]
+        stl = "gnustl_shared"
+    }
+
+    android.buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles += file('proguard-rules.pro')
+        }
+    }
+
+    android.productFlavors {
+
+        create("arm") {
+            ndk.with {
+                abiFilters += "armeabi"
+                File curDir = file('./')
+                curDir = file(curDir.absolutePath)
+                String libsDir = curDir.absolutePath+"\\src\\main\\jniLibs\\armeabi\\"
+
+                ldFlags += libsDir + "libopencv_core.a"
+                ldFlags += libsDir + "libIlmImf.a"
+                ldFlags += libsDir + "liblibjasper.a"
+                ldFlags += libsDir + "liblibjpeg.a"
+                ldFlags += libsDir + "liblibpng.a"
+                ldFlags += libsDir + "liblibtiff.a"
+                ldFlags += libsDir + "liblibwebp.a"
+                ldFlags += libsDir + "libtbb.a"
+                ldFlags += libsDir + "libopencv_calib3d.a"
+                ldFlags += libsDir + "libopencv_features2d.a"
+                ldFlags += libsDir + "libopencv_flann.a"
+                ldFlags += libsDir + "libopencv_hal.a"
+                ldFlags += libsDir + "libopencv_highgui.a"
+                ldFlags += libsDir + "libopencv_imgcodecs.a"
+                ldFlags += libsDir + "libopencv_imgproc.a"
+                ldFlags += libsDir + "libopencv_ml.a"
+                ldFlags += libsDir + "libopencv_objdetect.a"
+                ldFlags += libsDir + "libopencv_photo.a"
+                ldFlags += libsDir + "libopencv_shape.a"
+                ldFlags += libsDir + "libopencv_stitching.a"
+                ldFlags += libsDir + "libopencv_superres.a"
+                ldFlags += libsDir + "libopencv_ts.a"
+                ldFlags += libsDir + "libopencv_video.a"
+                ldFlags += libsDir + "libopencv_videoio.a"
+                ldFlags += libsDir + "libopencv_videostab.a"
+                ldFlags += libsDir + "libopencv_java3.so"
+
+            }
+        }
+        create("arm7") {
+            ndk.with {
+                abiFilters += "armeabi-v7a"
+                File curDir = file('./')
+                curDir = file(curDir.absolutePath)
+                String libsDir = curDir.absolutePath+"\\src\\main\\jniLibs\\armeabi-v7a\\"
+
+                ldFlags += libsDir + "libopencv_core.a"
+                ldFlags += libsDir + "libIlmImf.a"
+                ldFlags += libsDir + "liblibjasper.a"
+                ldFlags += libsDir + "liblibjpeg.a"
+                ldFlags += libsDir + "liblibpng.a"
+                ldFlags += libsDir + "liblibtiff.a"
+                ldFlags += libsDir + "liblibwebp.a"
+                ldFlags += libsDir + "libtbb.a"
+                ldFlags += libsDir + "libopencv_calib3d.a"
+                ldFlags += libsDir + "libopencv_features2d.a"
+                ldFlags += libsDir + "libopencv_flann.a"
+                ldFlags += libsDir + "libopencv_hal.a"
+                ldFlags += libsDir + "libopencv_highgui.a"
+                ldFlags += libsDir + "libopencv_imgcodecs.a"
+                ldFlags += libsDir + "libopencv_imgproc.a"
+                ldFlags += libsDir + "libopencv_ml.a"
+                ldFlags += libsDir + "libopencv_objdetect.a"
+                ldFlags += libsDir + "libopencv_photo.a"
+                ldFlags += libsDir + "libopencv_shape.a"
+                ldFlags += libsDir + "libopencv_stitching.a"
+                ldFlags += libsDir + "libopencv_superres.a"
+                ldFlags += libsDir + "libopencv_ts.a"
+                ldFlags += libsDir + "libopencv_video.a"
+                ldFlags += libsDir + "libopencv_videoio.a"
+                ldFlags += libsDir + "libopencv_videostab.a"
+                ldFlags += libsDir + "libopencv_java3.so"
+
+            }
+        }
+        create("arm8") {
+            ndk.with {
+                abiFilters += "arm64-v8a"
+                File curDir = file('./')
+                curDir = file(curDir.absolutePath)
+                String libsDir = curDir.absolutePath+"\\src\\main\\jniLibs\\arm64-v8a\\"
+
+                ldFlags += libsDir + "libopencv_core.a"
+                ldFlags += libsDir + "libIlmImf.a"
+                ldFlags += libsDir + "liblibjasper.a"
+                ldFlags += libsDir + "liblibjpeg.a"
+                ldFlags += libsDir + "liblibpng.a"
+                ldFlags += libsDir + "liblibtiff.a"
+                ldFlags += libsDir + "liblibwebp.a"
+                ldFlags += libsDir + "libtbb.a"
+                ldFlags += libsDir + "libopencv_calib3d.a"
+                ldFlags += libsDir + "libopencv_features2d.a"
+                ldFlags += libsDir + "libopencv_flann.a"
+                ldFlags += libsDir + "libopencv_hal.a"
+                ldFlags += libsDir + "libopencv_highgui.a"
+                ldFlags += libsDir + "libopencv_imgcodecs.a"
+                ldFlags += libsDir + "libopencv_imgproc.a"
+                ldFlags += libsDir + "libopencv_ml.a"
+                ldFlags += libsDir + "libopencv_objdetect.a"
+                ldFlags += libsDir + "libopencv_photo.a"
+                ldFlags += libsDir + "libopencv_shape.a"
+                ldFlags += libsDir + "libopencv_stitching.a"
+                ldFlags += libsDir + "libopencv_superres.a"
+                ldFlags += libsDir + "libopencv_ts.a"
+                ldFlags += libsDir + "libopencv_video.a"
+                ldFlags += libsDir + "libopencv_videoio.a"
+                ldFlags += libsDir + "libopencv_videostab.a"
+                ldFlags += libsDir + "libopencv_java3.so"
+
+            }
+        }
+
+        create("x86") {
+            ndk.with {
+                abiFilters += "x86"
+                File curDir = file('./')
+                curDir = file(curDir.absolutePath)
+                String libsDir = curDir.absolutePath+"\\src\\main\\jniLibs\\x86\\"
+
+                ldFlags += libsDir + "libopencv_core.a"
+                ldFlags += libsDir + "libIlmImf.a"
+                ldFlags += libsDir + "liblibjasper.a"
+                ldFlags += libsDir + "liblibjpeg.a"
+                ldFlags += libsDir + "liblibpng.a"
+                ldFlags += libsDir + "liblibtiff.a"
+                ldFlags += libsDir + "liblibwebp.a"
+                ldFlags += libsDir + "libtbb.a"
+                ldFlags += libsDir + "libopencv_calib3d.a"
+                ldFlags += libsDir + "libopencv_features2d.a"
+                ldFlags += libsDir + "libopencv_flann.a"
+                ldFlags += libsDir + "libopencv_hal.a"
+                ldFlags += libsDir + "libopencv_highgui.a"
+                ldFlags += libsDir + "libopencv_imgcodecs.a"
+                ldFlags += libsDir + "libopencv_imgproc.a"
+                ldFlags += libsDir + "libopencv_ml.a"
+                ldFlags += libsDir + "libopencv_objdetect.a"
+                ldFlags += libsDir + "libopencv_photo.a"
+                ldFlags += libsDir + "libopencv_shape.a"
+                ldFlags += libsDir + "libopencv_stitching.a"
+                ldFlags += libsDir + "libopencv_superres.a"
+                ldFlags += libsDir + "libopencv_ts.a"
+                ldFlags += libsDir + "libopencv_video.a"
+                ldFlags += libsDir + "libopencv_videoio.a"
+                ldFlags += libsDir + "libopencv_videostab.a"
+                ldFlags += libsDir + "libopencv_java3.so"
+
+            }
+        }
+        create("x86-64") {
+            ndk.with {
+                abiFilters += "x86_64"
+                File curDir = file('./')
+                curDir = file(curDir.absolutePath)
+                String libsDir = curDir.absolutePath+"\\src\\main\\jniLibs\\x86_64\\"
+
+                ldFlags += libsDir + "libopencv_core.a"
+                ldFlags += libsDir + "libIlmImf.a"
+                ldFlags += libsDir + "liblibjasper.a"
+                ldFlags += libsDir + "liblibjpeg.a"
+                ldFlags += libsDir + "liblibpng.a"
+                ldFlags += libsDir + "liblibtiff.a"
+                ldFlags += libsDir + "liblibwebp.a"
+                ldFlags += libsDir + "libtbb.a"
+                ldFlags += libsDir + "libopencv_calib3d.a"
+                ldFlags += libsDir + "libopencv_features2d.a"
+                ldFlags += libsDir + "libopencv_flann.a"
+                ldFlags += libsDir + "libopencv_hal.a"
+                ldFlags += libsDir + "libopencv_highgui.a"
+                ldFlags += libsDir + "libopencv_imgcodecs.a"
+                ldFlags += libsDir + "libopencv_imgproc.a"
+                ldFlags += libsDir + "libopencv_ml.a"
+                ldFlags += libsDir + "libopencv_objdetect.a"
+                ldFlags += libsDir + "libopencv_photo.a"
+                ldFlags += libsDir + "libopencv_shape.a"
+                ldFlags += libsDir + "libopencv_stitching.a"
+                ldFlags += libsDir + "libopencv_superres.a"
+                ldFlags += libsDir + "libopencv_ts.a"
+                ldFlags += libsDir + "libopencv_video.a"
+                ldFlags += libsDir + "libopencv_videoio.a"
+                ldFlags += libsDir + "libopencv_videostab.a"
+                ldFlags += libsDir + "libopencv_java3.so"
+
+            }
+        }
+
+        create("mips") {
+            ndk.with {
+                abiFilters += "mips"
+                File curDir = file('./')
+                curDir = file(curDir.absolutePath)
+                String libsDir = curDir.absolutePath+"\\src\\main\\jniLibs\\mips\\"
+
+                ldFlags += libsDir + "libopencv_core.a"
+                ldFlags += libsDir + "libIlmImf.a"
+                ldFlags += libsDir + "liblibjasper.a"
+                ldFlags += libsDir + "liblibjpeg.a"
+                ldFlags += libsDir + "liblibpng.a"
+                ldFlags += libsDir + "liblibtiff.a"
+                ldFlags += libsDir + "liblibwebp.a"
+                ldFlags += libsDir + "libtbb.a"
+                ldFlags += libsDir + "libopencv_calib3d.a"
+                ldFlags += libsDir + "libopencv_features2d.a"
+                ldFlags += libsDir + "libopencv_flann.a"
+                ldFlags += libsDir + "libopencv_hal.a"
+                ldFlags += libsDir + "libopencv_highgui.a"
+                ldFlags += libsDir + "libopencv_imgcodecs.a"
+                ldFlags += libsDir + "libopencv_imgproc.a"
+                ldFlags += libsDir + "libopencv_ml.a"
+                ldFlags += libsDir + "libopencv_objdetect.a"
+                ldFlags += libsDir + "libopencv_photo.a"
+                ldFlags += libsDir + "libopencv_shape.a"
+                ldFlags += libsDir + "libopencv_stitching.a"
+                ldFlags += libsDir + "libopencv_superres.a"
+                ldFlags += libsDir + "libopencv_ts.a"
+                ldFlags += libsDir + "libopencv_video.a"
+                ldFlags += libsDir + "libopencv_videoio.a"
+                ldFlags += libsDir + "libopencv_videostab.a"
+                ldFlags += libsDir + "libopencv_java3.so"
+
+            }
+        }
+        create("mips-64") {
+            ndk.with {
+                abiFilters += "mips64"
+                File curDir = file('./')
+                curDir = file(curDir.absolutePath)
+                String libsDir = curDir.absolutePath+"\\src\\main\\jniLibs\\mips64\\"
+
+                ldFlags += libsDir + "libopencv_core.a"
+                ldFlags += libsDir + "libIlmImf.a"
+                ldFlags += libsDir + "liblibjasper.a"
+                ldFlags += libsDir + "liblibjpeg.a"
+                ldFlags += libsDir + "liblibpng.a"
+                ldFlags += libsDir + "liblibtiff.a"
+                ldFlags += libsDir + "liblibwebp.a"
+                ldFlags += libsDir + "libtbb.a"
+                ldFlags += libsDir + "libopencv_calib3d.a"
+                ldFlags += libsDir + "libopencv_features2d.a"
+                ldFlags += libsDir + "libopencv_flann.a"
+                ldFlags += libsDir + "libopencv_hal.a"
+                ldFlags += libsDir + "libopencv_highgui.a"
+                ldFlags += libsDir + "libopencv_imgcodecs.a"
+                ldFlags += libsDir + "libopencv_imgproc.a"
+                ldFlags += libsDir + "libopencv_ml.a"
+                ldFlags += libsDir + "libopencv_objdetect.a"
+                ldFlags += libsDir + "libopencv_photo.a"
+                ldFlags += libsDir + "libopencv_shape.a"
+                ldFlags += libsDir + "libopencv_stitching.a"
+                ldFlags += libsDir + "libopencv_superres.a"
+                ldFlags += libsDir + "libopencv_ts.a"
+                ldFlags += libsDir + "libopencv_video.a"
+                ldFlags += libsDir + "libopencv_videoio.a"
+                ldFlags += libsDir + "libopencv_videostab.a"
+                ldFlags += libsDir + "libopencv_java3.so"
+
+            }
+        }
+       create("all")
+    }
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile project(':openCVLibrary300')
+}
